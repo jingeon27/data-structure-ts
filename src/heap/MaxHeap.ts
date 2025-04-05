@@ -1,7 +1,7 @@
 import { BaseHeap } from './BaseHeap';
 
-export class MinHeap extends BaseHeap {
+export class MaxHeap extends BaseHeap {
   protected compare(a: number, b: number) {
-    return a < b;
+    return a > b;
   }
 }
