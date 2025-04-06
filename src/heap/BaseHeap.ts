@@ -1,7 +1,9 @@
+import { CompareType } from '../common/compareType';
+
 export abstract class BaseHeap {
   protected heap: number[] = [];
 
-  constructor(private readonly compare: (a: number, b: number) => boolean) {}
+  constructor(private readonly compare: CompareType) {}
 
   protected parent(index: number) {
     return Math.floor((index - 1) / 2);
