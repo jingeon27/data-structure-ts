@@ -1,27 +1,27 @@
 import { CompareType } from '../common/compareType';
 
-export abstract class Heap {
-  protected heap: number[] = [];
+export class Heap {
+  private heap: number[] = [];
 
   constructor(private readonly compare: CompareType) {}
 
-  protected parent(index: number) {
+  private parent(index: number) {
     return Math.floor((index - 1) / 2);
   }
 
-  protected leftChild(index: number) {
+  private leftChild(index: number) {
     return 2 * index + 1;
   }
 
-  protected rightChild(index: number) {
+  private rightChild(index: number) {
     return 2 * index + 2;
   }
 
-  protected swap(i: number, j: number) {
+  private swap(i: number, j: number) {
     [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
   }
 
-  protected heapifyUp(index: number) {
+  private heapifyUp(index: number) {
     const parent = this.parent(index);
     if (index > 0 && this.compare(this.heap[index], this.heap[parent])) {
       this.swap(index, parent);
@@ -29,7 +29,7 @@ export abstract class Heap {
     }
   }
 
-  protected heapifyDown(index: number) {
+  private heapifyDown(index: number) {
     const left = this.leftChild(index);
     const right = this.rightChild(index);
     let target = index;
