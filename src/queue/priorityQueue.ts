@@ -1,6 +1,6 @@
 import { MinHeap } from '../heap/minHeap';
 
-export class MapPriorityQueue<T> {
+export class PriorityQueue<T> {
   private map = new Map<number, T[]>();
   private heap = new MinHeap();
   private count = 0;
