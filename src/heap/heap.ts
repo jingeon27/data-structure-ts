@@ -1,6 +1,6 @@
 import { CompareType } from '../common/compareType';
 
-export abstract class BaseHeap {
+export abstract class Heap {
   protected heap: number[] = [];
 
   constructor(private readonly compare: CompareType) {}
