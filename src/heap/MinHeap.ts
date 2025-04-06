@@ -1,9 +1,9 @@
 import { CompareType } from '../common/compareType';
-import { BaseHeap } from './BaseHeap';
+import { Heap } from './heap';
 
 export const compareMinHeap: CompareType = (a, b) => a < b;
 
-export class MinHeap extends BaseHeap {
+export class MinHeap extends Heap {
   constructor() {
     super(compareMinHeap);
   }
