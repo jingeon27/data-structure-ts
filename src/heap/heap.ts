@@ -53,7 +53,7 @@ export abstract class Heap {
   }
 
   extract() {
-    if (this.heap.length === 0) return undefined;
+    if (this.heap.length === 0) return;
     if (this.heap.length === 1) return this.heap.pop();
 
     const root = this.heap[0];
@@ -63,6 +63,7 @@ export abstract class Heap {
   }
 
   peek() {
+    if (this.heap.length === 0) return;
     return this.heap[0];
   }
 
