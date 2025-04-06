@@ -1,7 +1,10 @@
 import { BaseHeap } from './BaseHeap';
 
+function compare(a: number, b: number) {
+  return a < b;
+}
 export class MinHeap extends BaseHeap {
-  protected compare(a: number, b: number) {
-    return a < b;
+  constructor() {
+    super(compare);
   }
 }

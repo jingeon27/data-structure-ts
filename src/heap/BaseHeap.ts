@@ -1,7 +1,7 @@
 export abstract class BaseHeap {
   protected heap: number[] = [];
 
-  protected abstract compare(a: number, b: number): boolean;
+  constructor(private readonly compare: (a: number, b: number) => boolean) {}
 
   protected parent(index: number) {
     return Math.floor((index - 1) / 2);
