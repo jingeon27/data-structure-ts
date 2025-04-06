@@ -1,8 +1,7 @@
+import { CompareType } from '../common/compareType';
 import { BaseHeap } from './BaseHeap';
 
-export function compareMaxHeap(a: number, b: number) {
-  return a > b;
-}
+export const compareMaxHeap: CompareType = (a, b) => a > b;
 export class MaxHeap extends BaseHeap {
   constructor() {
     super(compareMaxHeap);
