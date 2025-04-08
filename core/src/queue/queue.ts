@@ -20,4 +20,8 @@ export class Queue<T> {
   size() {
     return this.items.length;
   }
+
+  toArray() {
+    return [...this.items];
+  }
 }
