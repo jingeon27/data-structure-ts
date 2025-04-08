@@ -12,17 +12,14 @@ export function useQueue<T>(initialValue: T[] = []) {
       },
       [queue],
     ),
-    useCallback(() => {
-      console.log(queue.toArray());
-      return queue.toArray().join(',');
-    }, [queue, initialValue]),
+    queue.size.bind(queue),
   );
 
   return {
     state,
-    enqueue: queue.enqueue,
-    dequeue: queue.dequeue,
-    peek: queue.peek,
-    size: queue.size,
+    enqueue: queue.enqueue.bind(queue),
+    dequeue: queue.dequeue.bind(queue),
+    peek: queue.peek.bind(queue),
+    size: queue.size.bind(queue),
   };
 }
