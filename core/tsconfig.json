@@ -16,5 +16,9 @@
     "resolveJsonModule": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": [
+    "**/*.spec.ts", // 💥 모든 테스트 파일 제외
+    "node_modules", // 기본적으로 항상 제외
+    "dist" // 빌드 결과물도 제외
+  ]
 }
