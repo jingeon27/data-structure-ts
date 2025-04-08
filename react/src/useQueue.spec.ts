@@ -7,10 +7,9 @@ describe('useQueue', () => {
 
     act(() => {
       result.current.enqueue('A');
-      console.log(result.current.state);
     });
 
-    expect(result.current.size).toBe(1);
+    expect(result.current.size()).toBe(1);
   });
 
   it('should dequeue and reflect size', () => {
@@ -25,7 +24,7 @@ describe('useQueue', () => {
       result.current.dequeue();
     });
 
-    expect(result.current.size).toBe(1);
+    expect(result.current.size()).toBe(1);
     expect(result.current.peek()).toBe('B');
   });
 });
