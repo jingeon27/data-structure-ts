@@ -1,8 +1,8 @@
 import { QueueObserver } from '@ds/core';
 import { useCallback, useState, useSyncExternalStore } from 'react';
 
-export function useQueue<T>() {
-  const [queue] = useState(() => new QueueObserver<T>());
+export function useQueue<T>(initialValue: T[] = []) {
+  const [queue] = useState(() => new QueueObserver<T>(initialValue));
 
   const state = useSyncExternalStore(
     useCallback(
@@ -12,7 +12,10 @@ export function useQueue<T>() {
       },
       [queue],
     ),
-    useCallback(queue.toArray, [queue]),
+    useCallback(() => {
+      console.log(queue.toArray());
+      return queue.toArray().join(',');
+    }, [queue, initialValue]),
   );
 
   return {

@@ -13,6 +13,7 @@
     "@ds/core": "workspace:*"
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.1.0",
     "@types/jest": "^29.5.14",
     "@types/react": "^19.0.1",
@@ -22,6 +23,7 @@
     "eslint-plugin-prettier": "^5.2.6",
     "eslint-plugin-react-compiler": "19.0.0-beta-df7b47d-20241124",
     "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "npm-run-all2": "^5.0.0",
     "prettier": "^3.5.3",
     "react": "^19.0.0",
