@@ -1,45 +1,45 @@
-import { TreeNode } from './tree';
+import { TreeNode, TreeNodeData } from './tree';
 
 export class BinarySearchTree<T> {
-  root: TreeNode<T> | null = null;
+  private root: TreeNode<T> | null = null;
 
   insert(value: T): void {
-    this.root = this._insert(this.root, value);
+    const insertNode = (node: TreeNode<T> | null, value: T): TreeNode<T> => {
+      if (node === null) return new TreeNode(value);
+
+      if (value < node.value) node.left = insertNode(node.left, value);
+      else if (value > node.value) node.right = insertNode(node.right, value);
+      // 중복은 무시
+      return node;
+    };
+
+    this.root = insertNode(this.root, value);
   }
 
-  private _insert(node: TreeNode<T> | null, value: T): TreeNode<T> {
-    if (node === null) return new TreeNode(value);
-
-    if (value < node.value) {
-      node.left = this._insert(node.left, value);
-    } else if (value > node.value) {
-      node.right = this._insert(node.right, value);
+  find(value: T): boolean {
+    let current = this.root;
+    while (current) {
+      if (value === current.value) return true;
+      current = value < current.value ? current.left : current.right;
     }
-    return node;
+    return false;
   }
 
-  contains(value: T): boolean {
-    return this._contains(this.root, value);
-  }
+  toArray(): TreeNodeData<T>[] {
+    const result: TreeNodeData<T>[] = [];
 
-  private _contains(node: TreeNode<T> | null, value: T): boolean {
-    if (node === null) return false;
-    if (value === node.value) return true;
-    return value < node.value
-      ? this._contains(node.left, value)
-      : this._contains(node.right, value);
-  }
+    const traverse = (node: TreeNode<T> | null) => {
+      if (!node) return;
+      result.push({
+        value: node.value,
+        left: node.left ? node.left.value : null,
+        right: node.right ? node.right.value : null,
+      });
+      traverse(node.left);
+      traverse(node.right);
+    };
 
-  inorder(): T[] {
-    const result: T[] = [];
-    this._inorder(this.root, result);
+    traverse(this.root);
     return result;
-  }
-
-  private _inorder(node: TreeNode<T> | null, result: T[]) {
-    if (!node) return;
-    this._inorder(node.left, result);
-    result.push(node.value);
-    this._inorder(node.right, result);
   }
 }
