@@ -1,11 +1,11 @@
 import { compareMinHeap, CompareType, HeapObserver } from '@ds/core';
 import { useCallback, useState, useSyncExternalStore } from 'react';
 
-export interface useHeapProps {
+export interface useHeapOptions {
   compare?: CompareType;
   initialItems?: number[];
 }
-export function useHeap({ compare = compareMinHeap, initialItems = [] }: useHeapProps = {}) {
+export function useHeap({ compare = compareMinHeap, initialItems = [] }: useHeapOptions = {}) {
   const [heap] = useState(() => {
     const h = new HeapObserver(compare);
     initialItems.forEach((item) => h.insert(item));
