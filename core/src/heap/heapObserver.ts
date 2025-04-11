@@ -1,18 +1,19 @@
+// HeapObserver.ts
 import { Observable } from '../common/observer';
-import { Queue } from './queue';
+import { Heap } from './heap';
 
-export class QueueObserver<T> extends Queue<T> {
+export class HeapObserver extends Heap {
   private observable = new Observable();
 
-  override enqueue(item: T) {
-    super.enqueue(item);
+  override insert(value: number) {
+    super.insert(value);
     this.observable.notify();
   }
 
-  override dequeue() {
-    const item = super.dequeue();
+  override extract() {
+    const value = super.extract();
     this.observable.notify();
-    return item;
+    return value;
   }
 
   subscribe(listener: VoidFunction) {
@@ -21,8 +22,5 @@ export class QueueObserver<T> extends Queue<T> {
 
   unsubscribe(listener: VoidFunction) {
     this.observable.unsubscribe(listener);
-  }
-  toArray() {
-    return super.toArray();
   }
 }
