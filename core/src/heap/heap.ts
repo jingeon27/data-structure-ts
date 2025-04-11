@@ -1,9 +1,10 @@
 import { CompareType } from '../common/compareType';
+import { compareMinHeap } from './minHeap';
 
 export class Heap {
   private heap: number[] = [];
 
-  constructor(private readonly compare: CompareType) {}
+  constructor(private readonly compare: CompareType = compareMinHeap) {}
 
   private parent(index: number) {
     return Math.floor((index - 1) / 2);

@@ -1,10 +1,14 @@
-import { compareMaxHeap, CompareType, HeapObserver } from '@ds/core';
+import { CompareType, HeapObserver } from '@ds/core';
 import { useCallback, useState, useSyncExternalStore } from 'react';
 
-export function useHeap(compare: CompareType = compareMaxHeap, initialItems: number[] = []) {
+export interface useHeapProps {
+  compare: CompareType;
+  initialItems: number[];
+}
+export function useHeap(props?: useHeapProps) {
   const [heap] = useState(() => {
-    const h = new HeapObserver(compare);
-    initialItems.forEach((item) => h.insert(item));
+    const h = new HeapObserver(props?.compare);
+    props?.initialItems.forEach((item) => h.insert(item));
     return h;
   });
 
