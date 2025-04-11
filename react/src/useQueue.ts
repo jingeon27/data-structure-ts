@@ -1,11 +1,11 @@
 import { QueueObserver } from '@ds/core';
 import { useCallback, useState, useSyncExternalStore } from 'react';
 
-export interface useQueueProps<T> {
+export interface useQueueOptions<T> {
   initialItems?: T[];
 }
 
-export function useQueue<T>({ initialItems = [] }: useQueueProps<T> = {}) {
+export function useQueue<T>({ initialItems = [] }: useQueueOptions<T> = {}) {
   const [queue] = useState(() => new QueueObserver<T>(initialItems));
 
   const state = useSyncExternalStore(
