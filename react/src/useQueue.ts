@@ -1,5 +1,6 @@
 import { QueueObserver } from '@ds/core';
 import { useCallback, useState, useSyncExternalStore } from 'react';
+import { bindMethods } from './common/bindMap';
 
 export interface useQueueOptions<T> {
   initialItems?: T[];
@@ -7,6 +8,7 @@ export interface useQueueOptions<T> {
 
 export function useQueue<T>({ initialItems = [] }: useQueueOptions<T> = {}) {
   const [queue] = useState(() => new QueueObserver<T>(initialItems));
+  const { dequeue, enqueue, peek, size } = bindMethods(queue)('dequeue', 'enqueue', 'peek', 'size');
 
   const state = useSyncExternalStore(
     useCallback(
@@ -16,14 +18,14 @@ export function useQueue<T>({ initialItems = [] }: useQueueOptions<T> = {}) {
       },
       [queue],
     ),
-    queue.size.bind(queue),
+    size,
   );
 
   return {
     state,
-    enqueue: queue.enqueue.bind(queue),
-    dequeue: queue.dequeue.bind(queue),
-    peek: queue.peek.bind(queue),
-    size: queue.size.bind(queue),
+    enqueue,
+    dequeue,
+    peek,
+    size,
   };
 }

@@ -1,5 +1,6 @@
 import { compareMinHeap, CompareType, HeapObserver } from '@ds/core';
 import { useCallback, useState, useSyncExternalStore } from 'react';
+import { bindMethods } from './common/bindMap';
 
 export interface useHeapOptions {
   compare?: CompareType;
@@ -12,8 +13,7 @@ export function useHeap({ compare = compareMinHeap, initialItems = [] }: useHeap
     return h;
   });
 
-  const size = heap.size.bind(heap);
-
+  const { size, ...others } = bindMethods(heap)('insert', 'extract', 'peek', 'size', 'isEmpty');
   const state = useSyncExternalStore(
     useCallback(
       (onChange) => {
@@ -27,10 +27,7 @@ export function useHeap({ compare = compareMinHeap, initialItems = [] }: useHeap
 
   return {
     state,
-    insert: heap.insert.bind(heap),
-    extract: heap.extract.bind(heap),
-    peek: heap.peek.bind(heap),
     size,
-    isEmpty: heap.isEmpty.bind(heap),
+    ...others,
   };
 }
