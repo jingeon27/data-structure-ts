@@ -8,7 +8,7 @@ export interface useQueueOptions<T> {
 
 export function useQueue<T>({ initialItems = [] }: useQueueOptions<T> = {}) {
   const [queue] = useState(() => new QueueObserver<T>(initialItems));
-  const { dequeue, enqueue, peek, size } = bindMethods(queue)('dequeue', 'enqueue', 'peek', 'size');
+  const { size, ...others } = bindMethods(queue)('enqueue', 'dequeue', 'peek', 'size');
 
   const state = useSyncExternalStore(
     useCallback(
@@ -23,9 +23,7 @@ export function useQueue<T>({ initialItems = [] }: useQueueOptions<T> = {}) {
 
   return {
     state,
-    enqueue,
-    dequeue,
-    peek,
     size,
+    ...others,
   };
 }
