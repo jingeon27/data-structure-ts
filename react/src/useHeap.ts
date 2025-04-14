@@ -1,4 +1,4 @@
-import { compareMinHeap, CompareType, HeapObserver } from '@ds/core';
+import { compareMin, CompareType, HeapObserver } from '@ds/core';
 import { useCallback, useState, useSyncExternalStore } from 'react';
 import { bindMethods } from './common/bindMap';
 
@@ -6,7 +6,7 @@ export interface useHeapOptions {
   compare?: CompareType;
   initialItems?: number[];
 }
-export function useHeap({ compare = compareMinHeap, initialItems = [] }: useHeapOptions = {}) {
+export function useHeap({ compare = compareMin, initialItems = [] }: useHeapOptions = {}) {
   const [heap] = useState(() => {
     const h = new HeapObserver(compare);
     initialItems.forEach((item) => h.insert(item));
