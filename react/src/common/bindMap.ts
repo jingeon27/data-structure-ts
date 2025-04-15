@@ -3,7 +3,7 @@ export type FunctionKeys<T> = {
 }[keyof T];
 
 export function bindMethods<T extends object>(instance: T) {
-  return <K extends FunctionKeys<T>>(...methods: [K, ...K[]]): Pick<T, K> => {
+  return <K extends FunctionKeys<T>>(...methods: K[]): Pick<T, K> => {
     return methods.reduce(
       (acc, key) => {
         const fn = instance[key];
