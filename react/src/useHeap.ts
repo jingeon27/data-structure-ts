@@ -14,6 +14,7 @@ export function useHeap({ compare = compareMin, initialItems = [] }: useHeapOpti
   });
 
   const { size, ...others } = bindMethods(heap)('insert', 'extract', 'peek', 'size', 'isEmpty');
+
   const state = useSyncExternalStore(
     useCallback(
       (onChange) => {
