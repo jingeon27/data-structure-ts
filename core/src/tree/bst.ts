@@ -32,8 +32,8 @@ export class BinarySearchTree<T> {
       if (!node) return;
       result.push({
         value: node.value,
-        left: node.left ? node.left.value : null,
-        right: node.right ? node.right.value : null,
+        left: node.left?.value ?? null,
+        right: node.right?.value ?? null,
       });
       traverse(node.left);
       traverse(node.right);
