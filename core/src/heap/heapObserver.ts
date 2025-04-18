@@ -17,6 +17,7 @@ export class HeapObserver extends Heap {
   }
 
   subscribe(listener: VoidFunction) {
+    console.log(listener);
     this.observable.subscribe(listener);
   }
 
