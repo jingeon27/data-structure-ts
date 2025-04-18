@@ -1,6 +1,7 @@
 import { compareMin, CompareType, HeapObserver } from '@ds/core';
-import { useCallback, useState, useSyncExternalStore } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import { bindMethods } from './common/bindMap';
+import { useSubscribe } from './common/useSubscribe';
 
 export interface useHeapOptions {
   compare?: CompareType;
@@ -15,16 +16,7 @@ export function useHeap({ compare = compareMin, initialItems = [] }: useHeapOpti
 
   const { size, ...others } = bindMethods(heap)('insert', 'extract', 'peek', 'size', 'isEmpty');
 
-  const state = useSyncExternalStore(
-    useCallback(
-      (onChange) => {
-        heap.subscribe(onChange);
-        return () => heap.unsubscribe(onChange);
-      },
-      [heap],
-    ),
-    size,
-  );
+  const state = useSyncExternalStore(useSubscribe(heap), size);
 
   return {
     state,
